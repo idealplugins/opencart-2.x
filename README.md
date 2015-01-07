@@ -1,4 +1,4 @@
-# iDEAL plugin for Opencart 1.x
+# iDEAL plugin for Opencart 2.x
 
 ## Usage
 Use this plugin to add support for iDEAL, Mister Cash, Sofort and other payment methods of 
@@ -21,8 +21,8 @@ We recommend cloning the repository so you can easily get updates.
 
 ### 3. Setting up
 
-Check out the specific installation instructions and tips on https://www.idealplugins.nl/opencart#tab_install
+Check out the specific installation instructions and tips on https://www.idealplugins.nl/opencart2#tab_install
 
 ## Troubleshooting
 
-Please see the FAQ on https://www.idealplugins.nl/opencart#tab_help
+Please see the FAQ on https://www.idealplugins.nl/opencart2#tab_help
