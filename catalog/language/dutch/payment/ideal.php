@@ -1,9 +1,7 @@
 <?php
 // Text
 $_['text_title']           = 'iDEAL';
-$_['text_credit_card']     = 'iDEAL';
-$_['text_wait']            = 'Even geduld a.u.b.';
+$_['text_wait']            = 'Even geduld...';
 
 // Entry
-$_['entry_bank_id']        = '&nbsp;&nbsp;Bank:';
-?>
+$_['entry_bank_id']        = 'Kies je bank';

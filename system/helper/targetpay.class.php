@@ -4,8 +4,8 @@
  * @file	 Provides support for TargetPay iDEAL, Mister Cash and Sofort Banking
  * @author	 Yellow Melon B.V.
  * @url		 http://www.idealplugins.nl
- * @release	 11-09-2014
- * @ver		 2.4
+ * @release	 29-09-2014
+ * @ver		 2.5
  *
  * Changes:
  *
@@ -13,6 +13,7 @@
  * v2.2     Verify Peer disabled, too many problems with this
  * v2.3 	Added paybyinvoice (achteraf betalen) and paysafecard (former Wallie)
  * v2.4		Removed IP_range and deprecated checkReportValidity . Because it is bad practice.
+ * v2.5		Added creditcards by ATOS
  */
 
 /**
@@ -38,7 +39,7 @@ class TargetPayCore
 
     // Constant array's
 
-    protected $paymentOptions		= array("AUTO", "IDE", "MRC", "DEB", "AFT", "WAL");		
+    protected $paymentOptions		= array("AUTO", "IDE", "MRC", "DEB", "AFT", "WAL", "CC");		
     																			/*  If payMethod is set to 'AUTO' it will decided on the value of bankId
     																			    Then, when requested the bankId list will be filled with
 
@@ -47,13 +48,14 @@ class TargetPayCore
 																				    c) 'DEB' + countrycode for Sofort Banking, e.g. DEB49 for Germany
                                                                                 */
 
-    protected $minimumAmounts		= array("AUTO" => 84, "IDE" => 84, "MRC" => 49, "DEB" => 10, "AFT" => 1, "WAL" => 10);
+    protected $minimumAmounts		= array("AUTO" => 84, "IDE" => 84, "MRC" => 49, "DEB" => 10, "AFT" => 1, "WAL" => 10, "CC" => 100);
 
     protected $checkAPIs			= array("IDE" => "https://www.targetpay.com/ideal/check",
     										"MRC" => "https://www.targetpay.com/mrcash/check",
                                             "DEB" => "https://www.targetpay.com/directebanking/check",
                                             "AFT" => "https://www.targetpay.com/afterpay/check",
-                                            "WAL" => "http://www.targetpay.com/paysafecard/check"
+                                            "WAL" => "https://www.targetpay.com/paysafecard/check",
+                                            "CC" => "https://www.targetpay.com/creditcard_atos/check"
                                             );
 
     // Variables
@@ -357,6 +359,11 @@ class TargetPayCore
 	            $this->bankId = false;
 	            return true;
 	        } else
+	        if ($bankId=="CC") {
+	        	$this->payMethod = "CC";
+	            $this->bankId = false;
+	            return true;
+	        } else	        
 	        if (substr($bankId,0,3)=="DEB") {
 	        	$this->payMethod = "DEB";
 	            $this->bankId = false;

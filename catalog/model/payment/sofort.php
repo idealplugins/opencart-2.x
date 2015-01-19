@@ -1,48 +1,55 @@
 <?php
 
 /**
-
-	iDEALplugins.nl
-    TargetPay plugin v1.1 for Opencart 1.5+
-
-    (C) Copyright Yellow Melon 2013
-
- 	@file 		TargetPay Catalog Model
-	@author		Yellow Melon B.V. / www.idealplugins.nl
-
+ *
+ *	iDEALplugins.nl
+ *  TargetPay plugin for Opencart 2.0+
+ *
+ *  (C) Copyright Yellow Melon 2014
+ *
+ *	@file 		TargetPay Catalog Model
+ *	@author		Yellow Melon B.V. / www.idealplugins.nl
+ *
  */
 
-class ModelPaymentsofort extends Model {
+class ModelPaymentSofort extends Model 
+{
 
-  	public function getMethod($address, $total) {
-		$this->language->load('payment/sofort');
+	public $currencies = array('EUR');
+	public $minimumAmount = 0.10;
+	public $maximumAmount = 5000;
 
-        $sql = "SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" .
-        		(int)$this->config->get('sofort_geo_zone_id') . "' AND country_id = '" .
-                (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')";
-		$query = $this->db->query($sql);
+  	public function getMethod($address, $total) 
+  	{
+		$this->load->language('payment/sofort');
 
-		if ($this->config->get('sofort_total') > 0 && $this->config->get('sofort_total') > $total) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . 
+			(int)$this->config->get('sofort_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . 
+			"' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+
+		if ($this->config->get('sofort_total') > $total) {
 			$status = false;
-			} elseif (!$this->config->get('sofort_geo_zone_id')) {
+		} elseif (!$this->config->get('sofort_geo_zone_id')) {
 			$status = true;
-			} elseif ($query->num_rows) {
+		} elseif ($query->num_rows) {
 			$status = true;
-			} else {
+		} else {
 			$status = false;
-			}
+		}
 
+		if (!in_array(strtoupper($this->currency->getCode()), $this->currencies)) $status = false;
+		
 		$method_data = array();
 
 		if ($status) {
       		$method_data = array(
         		'code'       => 'sofort',
         		'title'      => $this->language->get('text_title'),
-				'sort_order' => $this->config->get('sofort_sort_order')
+				'sort_order' => $this->config->get('sofort_sort_order'),
+				'terms'		 => '',
       		);
-	    	}
+	    }
 
     	return $method_data;
-	  	}
-	}
-?>
+  	}
+}

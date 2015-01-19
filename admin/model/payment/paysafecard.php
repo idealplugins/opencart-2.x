@@ -1,21 +1,22 @@
 <?php
 
-/*
-
-	iDEALplugins.nl
-    TargetPay plugin v1.1 for Opencart 1.5+
-
-    (C) Copyright Yellow Melon 2013
-
- 	@file 		TargetPay Admin Model
-	@author		Yellow Melon B.V. / www.idealplugins.nl
-
+/**
+ *
+ *	iDEALplugins.nl
+ *  TargetPay plugin for Opencart 2.0+
+ *
+ *  (C) Copyright Yellow Melon 2014
+ *
+ *	@file 		TargetPay Admin Model
+ *	@author		Yellow Melon B.V. / www.idealplugins.nl
+ *
  */
 
-class ModelPaymentpaysafecard extends Model {
+class ModelPaymentpaysafecard extends Model 
+{
 
-  	public function createTable() {
-
+  	public function createTable() 
+  	{
 		$sql = "CREATE TABLE IF NOT EXISTS `".DB_PREFIX."paysafecard` (
 				`order_id` VARCHAR(64) DEFAULT NULL,
 			    `method` VARCHAR(6) DEFAULT NULL,
@@ -25,7 +26,6 @@ class ModelPaymentpaysafecard extends Model {
 				PRIMARY KEY (`order_id`))";
 
     	$result = $this->db->query ($sql);
-	  	}
-
 	}
-?>
+
+}

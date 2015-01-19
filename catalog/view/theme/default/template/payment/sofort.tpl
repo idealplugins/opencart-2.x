@@ -1,42 +1,46 @@
 <?php
 
 /**
-
-	iDEALplugins.nl
-    TargetPay plugin v1.1 for Opencart 1.5+
-
-    (C) Copyright Yellow Melon 2013
-
- 	@file 		TargetPay Catalog Template
-	@author		Yellow Melon B.V. / www.idealplugins.nl
-
+ *
+ *	iDEALplugins.nl
+ *  TargetPay plugin for Opencart 2.0+
+ *
+ *  (C) Copyright Yellow Melon 2014
+ *
+ *	@file 		TargetPay Catalog Template
+ *	@author		Yellow Melon B.V. / www.idealplugins.nl
+ *
  */
 
 ?>
 
-<h2><?php echo $text_credit_card; ?></h2>
-<div class="content" id="payment">
-  <table class="form">
-  	<tr>
-      <td height=10></td>
-    </tr>
-    <tr>
-      <td><?php echo $entry_bank_id; ?></td>
-      <td><select name="bank_id">
-      		<option value="49">Deutschland</option>
-          	<option value="41">Schweiz</option>
-          	<option value="43">&Ouml;sterreich</option>          
-        </select></td>
-    </tr>
-  </table>
+<h2><?php echo $text_title; ?></h2>
+
+<div class="row" id="payment">
+	<div class="col-xs-12 col-sm-3">
+		<p><?php echo $entry_bank_id; ?></p>
+	</div>
+	<div class="col-xs-12 col-sm-9">
+		<p>
+		<select name="bank_id">
+			<option value="49">Deutschland</option>
+			<option value="43">&Ouml;sterreich</option>
+			<option value="41">Schwitzerland</option>
+		</select>
+		</p>
+	</div>
 </div>
-<div class="buttons">
-  <div class="right">
-    <input type="hidden" name="custom" value="<?php echo $custom; ?>" />   
-    <input type="button" value="<?php echo $button_confirm; ?>" id="button-confirm" class="button" />
-  </div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-offset-3 col-sm-9">
+		<p>
+    		<input type="hidden" name="custom" value="<?php echo $custom; ?>" />   
+    		<input type="button" value="<?php echo $button_confirm; ?>" id="button-confirm" class="button" />	
+    	</p>
+	</div>
 </div>
-<script type="text/javascript"><!--
+
+<script type="text/javascript">
 $('#button-confirm').bind('click', function() {
 	$.ajax({
 		url: 'index.php?route=payment/sofort/send',
@@ -62,4 +66,4 @@ $('#button-confirm').bind('click', function() {
 		}
 	});
 });
-//--></script> 
+</script> 
