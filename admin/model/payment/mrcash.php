@@ -20,8 +20,8 @@ class ModelPaymentmrcash extends Model
 		$sql = "CREATE TABLE IF NOT EXISTS `".DB_PREFIX."mrcash` (
 				`order_id` VARCHAR(64) DEFAULT NULL,
 			    `method` VARCHAR(6) DEFAULT NULL,
-				`ideal_txid` VARCHAR(64) DEFAULT NULL,
-			    `ideal_response` VARCHAR(128) DEFAULT NULL,
+				`mrcash_txid` VARCHAR(64) DEFAULT NULL,
+			    `mrcash_response` VARCHAR(128) DEFAULT NULL,
 			    `paid` DATETIME DEFAULT NULL,
 				PRIMARY KEY (`order_id`))";
 
