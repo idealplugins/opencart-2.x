@@ -12,12 +12,12 @@
  *
  */
 
-class ModelPaymentideal extends Model 
+class ModelPaymentmrcash extends Model 
 {
 
   	public function createTable() 
   	{
-		$sql = "CREATE TABLE IF NOT EXISTS `".DB_PREFIX."ideal` (
+		$sql = "CREATE TABLE IF NOT EXISTS `".DB_PREFIX."mrcash` (
 				`order_id` VARCHAR(64) DEFAULT NULL,
 			    `method` VARCHAR(6) DEFAULT NULL,
 				`ideal_txid` VARCHAR(64) DEFAULT NULL,
