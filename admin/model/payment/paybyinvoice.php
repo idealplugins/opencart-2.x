@@ -19,7 +19,7 @@ class ModelPaymentpaybyinvoice extends Model
 				`paybyinvoice_txid` VARCHAR(64) DEFAULT NULL,
 			    `paybyinvoice_response` VARCHAR(128) DEFAULT NULL,
 			    `paid` DATETIME DEFAULT NULL,
-				PRIMARY KEY (`order_id`))";
+				PRIMARY KEY (`order_id`, `paybyinvoice_txid`))";
 
     	$result = $this->db->query ($sql);
   	}

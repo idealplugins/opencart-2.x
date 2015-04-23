@@ -23,7 +23,7 @@ class ModelPaymentsofort extends Model
 				`sofort_txid` VARCHAR(64) DEFAULT NULL,
 			    `sofort_response` VARCHAR(128) DEFAULT NULL,
 			    `paid` DATETIME DEFAULT NULL,
-				PRIMARY KEY (`order_id`))";
+				PRIMARY KEY (`order_id`, `sofort_txid`))";
 
     	$result = $this->db->query ($sql);
 	}

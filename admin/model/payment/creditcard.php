@@ -23,7 +23,7 @@ class ModelPaymentcreditcard extends Model
 				`creditcard_txid` VARCHAR(64) DEFAULT NULL,
 			    `creditcard_response` VARCHAR(128) DEFAULT NULL,
 			    `paid` DATETIME DEFAULT NULL,
-				PRIMARY KEY (`order_id`))";
+				PRIMARY KEY (`order_id`, `creditcard_txid`))";
 
     	$result = $this->db->query ($sql);
 	}

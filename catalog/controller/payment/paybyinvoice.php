@@ -55,9 +55,9 @@ class ControllerPaymentpaybyinvoice extends Controller
      *		Get txid/order_id pair from database
      */
 
-    public function getTxid ($order_id) 
+    public function getTxid ($order_id, $txid) 
     {
-    	$sql = "SELECT * FROM `".DB_PREFIX."paybyinvoice` WHERE `order_id`='".$this->db->escape($order_id)."'";
+        $sql = "SELECT * FROM `".DB_PREFIX."paybyinvoice` WHERE `order_id`='".$this->db->escape($order_id)."' AND `paybyinvoice_txid`='".$this->db->escape($txid)."'";
     	$result = $this->db->query ($sql);
         return $result->rows[0];
    	}
@@ -229,7 +229,7 @@ class ControllerPaymentpaybyinvoice extends Controller
 		$this->load->model('checkout/order');
 		$order_info = $this->model_checkout_order->getOrder($order_id);
 
-        $targetPayTx = $this->getTxid ($order_id);
+        $targetPayTx = $this->getTxid ($order_id, $_GET["trxid"]);
 
         if (!$targetPayTx) {
 			$this->log->write('Could not find TargetPay transaction data for order_id='.$order_id);

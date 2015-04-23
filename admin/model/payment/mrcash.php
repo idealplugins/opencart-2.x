@@ -23,7 +23,7 @@ class ModelPaymentmrcash extends Model
 				`mrcash_txid` VARCHAR(64) DEFAULT NULL,
 			    `mrcash_response` VARCHAR(128) DEFAULT NULL,
 			    `paid` DATETIME DEFAULT NULL,
-				PRIMARY KEY (`order_id`))";
+				PRIMARY KEY (`order_id`, `mrcash_txid`))";
 
     	$result = $this->db->query ($sql);
 	}

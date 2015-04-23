@@ -23,7 +23,7 @@ class ModelPaymentideal extends Model
 				`ideal_txid` VARCHAR(64) DEFAULT NULL,
 			    `ideal_response` VARCHAR(128) DEFAULT NULL,
 			    `paid` DATETIME DEFAULT NULL,
-				PRIMARY KEY (`order_id`))";
+				PRIMARY KEY (`order_id`, `ideal_txid`))";
 
     	$result = $this->db->query ($sql);
 	}

@@ -23,7 +23,7 @@ class ModelPaymentpaysafecard extends Model
 				`paysafecard_txid` VARCHAR(64) DEFAULT NULL,
 			    `paysafecard_response` VARCHAR(128) DEFAULT NULL,
 			    `paid` DATETIME DEFAULT NULL,
-				PRIMARY KEY (`order_id`))";
+				PRIMARY KEY (`order_id`, `paysafecard_txid`))";
 
     	$result = $this->db->query ($sql);
 	}
