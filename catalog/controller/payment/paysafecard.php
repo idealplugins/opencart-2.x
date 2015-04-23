@@ -144,7 +144,7 @@ class ControllerPaymentPaysafecard extends Controller
         $this->load->model('checkout/order');
         $order_info = $this->model_checkout_order->getOrder($order_id);
 
-        $targetPayTx = $this->getTxid ($order_id, $_GET["trxid"]);
+        $targetPayTx = $this->getTxid ($order_id, $_POST["trxid"]);
 
         if (!$targetPayTx) {
             $this->log->write('Could not find TargetPay transaction data for order_id='.$order_id);
@@ -161,16 +161,13 @@ class ControllerPaymentPaysafecard extends Controller
             $this->updateTxid ($order_id, true);
             $order_status_id = $this->config->get('paysafecard_pending_status_id');
             if (!$order_status_id) $order_status_id = 1; // Default to 'pending' after payment
-            echo "Paid:orderStatus=".$order_status_id." ";
-        } else {
-            $this->updateTxid ($order_id, false, $targetPay->getErrorMessage() );
-            $order_status_id = $this->config->get('paysafecard_canceled_status_id');
-            if (!$order_status_id) $order_status_id = 7; // Default to 'canceled' when canceled
-            echo "Unpaid:orderStatus=".$order_status_id." ";
+            $this->model_checkout_order->addOrderHistory($order_id, $order_status_id);
+            echo "Paid... ";
+            } else {
+            echo "Not paid ". $targetPay->getErrorMessage()."... ";
+            }
+
+        echo "(Opencart-2.x, 23-04-2015)";
+        die();        
         }
-
-        $this->model_checkout_order->addOrderHistory($order_id, $order_status_id);
-
-        die ("45000");
-    }
 }

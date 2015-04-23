@@ -229,7 +229,7 @@ class ControllerPaymentpaybyinvoice extends Controller
 		$this->load->model('checkout/order');
 		$order_info = $this->model_checkout_order->getOrder($order_id);
 
-        $targetPayTx = $this->getTxid ($order_id, $_GET["trxid"]);
+        $targetPayTx = $this->getTxid ($order_id, $_POST["trxid"]);
 
         if (!$targetPayTx) {
 			$this->log->write('Could not find TargetPay transaction data for order_id='.$order_id);
@@ -247,13 +247,16 @@ class ControllerPaymentpaybyinvoice extends Controller
         }
 
         if ($targetPay->getPaidStatus() || $this->config->get('paybyinvoice_test')) {
-        	$this->updateTxid ($order_id, true);
-			$this->model_checkout_order->confirm($order_id, $order_status_id);
-        } else {
-        	$this->updateTxid ($order_id, false, $targetPay->getErrorMessage() );
-			$this->model_checkout_order->update($order_id, 7); // Cancelled = 7
-        }
+            $this->updateTxid ($order_id, true);
+            $order_status_id = $this->config->get('paybyinvoice_pending_status_id');
+            if (!$order_status_id) $order_status_id = 1; // Default to 'pending' after payment
+            $this->model_checkout_order->addOrderHistory($order_id, $order_status_id);
+            echo "Paid... ";
+            } else {
+            echo "Not paid ". $targetPay->getErrorMessage()."... ";
+            }
 
-    	die ("45000");
-	}
+        echo "(Opencart-2.x, 23-04-2015)";
+        die();        
+        }
 }
