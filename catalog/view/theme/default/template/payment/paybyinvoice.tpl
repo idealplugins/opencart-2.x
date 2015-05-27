@@ -9,7 +9,7 @@
  */ 
 
 require_once ("system/helper/targetpay.class.php");
-$targetPay = new TargetPayCore ("AFT", 94103, "e59dbd219e068daade7139be42c5dfd5", "nl", false);
+$targetPay = new TargetPayCore ("AFT", 93929, "e59dbd219e068daade7139be42c5dfd5", "nl", false);
 
 ?>
 
